@@ -197,7 +197,7 @@ class StudentManager:
             """
             self.cursor.execute(sql,(user,password))
             res = self.cursor.fetchall()
-            print('登录成功:',res,type(res))
+            print('登录成功:',user)
             return res
         except:
             print("账号或密码错误")    
@@ -332,63 +332,90 @@ def main():
     passwords=input("请输入密码：")
     a=sm.user(users,passwords)
     nn=a[0]['priority']
-    print(type(nn))
     if nn==1:
-        pass
-    # while True:
-    #     print("\n======= 学生信息成绩管理系统【双表版】=======")
-    #     print("1. 添加学生（含成绩录入）")
-    #     print("2. 查看所有学生完整信息")
-    #     print("3. 按学号查询学生成绩")
-    #     print("4. 修改学生基础信息")
-    #     print("5. 修改学生成绩信息")
-    #     print("6. 删除学生（含成绩）")
-    #     print("0. 退出系统")
-    #     print("==========================================")
+        
+        while True:
+            print("\n======= 学生信息成绩管理系统【root版】=======")
+            print("1. 添加学生（含成绩录入）")
+            print("2. 查看所有学生完整信息")
+            print("3. 按学号查询学生成绩")
+            print("4. 修改学生基础信息")
+            print("5. 修改学生成绩信息")
+            print("6. 删除学生（含成绩）")
+            print("0. 退出系统")
+            print("==========================================")
 
-    #     choice = input("请输入功能编号：")
+            choice = input("请输入功能编号：")
 
-    #     if choice == "1":
-    #         sid = input("请输入学生学号：")
-    #         name = input("请输入学生姓名：")
-    #         age = input("请输入学生年龄：")
-    #         major = input("请输入所学专业：")
-    #         c = input("请输入语文成绩：")
-    #         m = input("请输入数学成绩：")
-    #         e = input("请输入英语成绩：")
-    #         sm.add_student(sid, name, age, major, c, m, e)
+            if choice == "1":
+                sid = input("请输入学生学号：")
+                name = input("请输入学生姓名：")
+                age = input("请输入学生年龄：")
+                major = input("请输入所学专业：")
+                c = input("请输入语文成绩：")
+                m = input("请输入数学成绩：")
+                e = input("请输入英语成绩：")
+                sm.add_student(sid, name, age, major, c, m, e)
 
-    #     elif choice == "2":
-    #         sm.show_all_student()
+            elif choice == "2":
+                sm.show_all_student()
 
-    #     elif choice == "3":
-    #         sid = input("请输入查询学号：")
-    #         sm.search_score_by_id(sid)
+            elif choice == "3":
+                sid = input("请输入查询学号：")
+                sm.search_score_by_id(sid)
 
-    #     elif choice == "4":
-    #         sid = input("请输入要修改的学号：")
-    #         age = input("请输入新年龄：")
-    #         major = input("请输入新专业：")
-    #         sm.update_student_info(sid, age, major)
+            elif choice == "4":
+                sid = input("请输入要修改的学号：")
+                age = input("请输入新年龄：")
+                major = input("请输入新专业：")
+                sm.update_student_info(sid, age, major)
 
-    #     elif choice == "5":
-    #         sid = input("请输入要修改成绩的学号：")
-    #         c = input("请输入新语文成绩：")
-    #         m = input("请输入新数学成绩：")
-    #         e = input("请输入新英语成绩：")
-    #         sm.update_student_score(sid, c, m, e)
+            elif choice == "5":
+                sid = input("请输入要修改成绩的学号：")
+                c = input("请输入新语文成绩：")
+                m = input("请输入新数学成绩：")
+                e = input("请输入新英语成绩：")
+                sm.update_student_score(sid, c, m, e)
 
-    #     elif choice == "6":
-    #         sid = input("请输入要删除的学号：")
-    #         sm.delete_student(sid)
+            elif choice == "6":
+                sid = input("请输入要删除的学号：")
+                sm.delete_student(sid)
 
-    #     elif choice == "0":
-    #         sm.close()
-    #         print("👋 系统退出成功，再见！")
-    #         break
+            elif choice == "0":
+                sm.close()
+                print("👋 系统退出成功，再见！")
+                break
 
-    #     else:
-    #         print("❌ 输入无效，请输入0-6的数字！")
+            else:
+                print("❌ 输入无效，请输入0-6的数字！")
+    elif nn==2:
+        while True:
+            print("\n======= 学生信息成绩管理系统【root版】=======")
+            print("1. 查看所有学生完整信息")
+            print("2. 按学号查询学生成绩")
+            print("0. 退出系统")
+            print("==========================================")
+
+            choice = input("请输入功能编号：")
+
+            if choice == "1":
+                sm.show_all_student()
+
+            elif choice == "2":
+                sid = input("请输入查询学号：")
+                sm.search_score_by_id(sid)
+
+            elif choice == "0":
+                sm.close()
+                print("👋 系统退出成功，再见！")
+                break
+
+            else:
+                print("❌ 输入无效，请输入0-6的数字！")
+    else:
+        print("没有访问权限！")
+            
+
 
 if __name__ == "__main__":
 
