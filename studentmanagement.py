@@ -200,7 +200,7 @@ class StudentManager:
             print('登录成功:',user)
             return res
         except:
-            print("账号或密码错误")    
+            print("账号或密码错误")  
             return 0
 
     # 1. 添加学生信息 + 录入成绩（双表同时插入）
@@ -330,8 +330,14 @@ def main():
     sm = StudentManager()
     users=input("请输入用户名：")
     passwords=input("请输入密码：")
-    a=sm.user(users,passwords)
-    nn=a[0]['priority']
+    while True:
+        try:
+            a=sm.user(users,passwords)
+            nn=a[0]['priority']
+            break
+        except:
+            print("账号或密码错误")
+            exit()
     if nn==1:
         
         while True:
@@ -390,7 +396,7 @@ def main():
                 print("❌ 输入无效，请输入0-6的数字！")
     elif nn==2:
         while True:
-            print("\n======= 学生信息成绩管理系统【root版】=======")
+            print("\n======= 学生信息成绩管理系统【用户版】=======")
             print("1. 查看所有学生完整信息")
             print("2. 按学号查询学生成绩")
             print("0. 退出系统")
@@ -418,6 +424,4 @@ def main():
 
 
 if __name__ == "__main__":
-
-    
     main()
