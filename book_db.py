@@ -36,7 +36,21 @@ class BookManager:
         except Exception as e:
             self.conn.rollback()
             print("❌ 注册失败：", e)
-
+    
+    def new_password(self,user,password,new__password):
+        try:
+            sql1="select passwords from user where user=%s"
+            self.cursor.execute(sql1,user)
+            res=self.cursor.fetchone()["passwords"]
+            print(res,type(res))
+            if password==res:
+                sql2="update user set passwords=%s where user=%s"
+                self.cursor.execute(sql2,(new__password,user))
+                self.conn.commit()
+                print("密码修改成功！")
+        except Exception as e:
+            self.conn.rollback()
+            print("❌ 密码修改失败：", e)
 
     #用户登入
     def user(self,user,password):
@@ -263,6 +277,7 @@ def main():
             print("7. 查看借阅用户借书数据")
             print("8. 查看指定用户借书数据")
             print("9. 查看已删除的图书信息")
+            print("10.修改密码")
             print("0. 退出系统")
             print("==========================================")
 
@@ -329,6 +344,11 @@ def main():
             elif choice == "9":
                 sm.show_delete()
 
+            elif choice == '10':
+                password=input("输入账号密码：")
+                new_password=input("输入新密码：")
+                sm.new_password(users,password,new_password)
+
             elif choice == "0":
                 sm.close()
                 print("👋 系统退出成功，再见！")
@@ -343,6 +363,7 @@ def main():
             print("2. 按条件查询图书")
             print("3. 借阅图书")
             print("4.查看个人借阅信息")
+            print("5.修改密码")
             print("0. 退出系统")
             print("==========================================")
 
@@ -366,9 +387,16 @@ def main():
                     sm.search_book(out,"classify")
                 else:
                     print('选择无效！')
+
             elif choice == "3":
                 book_id = input("请输入要借阅or交还的图书编号：")
                 sm.bore_book(int(book_id),users)
+
+            elif choice == '4':
+                password=input("输入账号密码：")
+                new_password=input("输入新密码：")
+                sm.new_password(users,password,new_password)
+
             elif choice == "0":
                 sm.close()
                 print("👋 系统退出成功，再见！")
@@ -383,6 +411,7 @@ def main():
 
 if __name__ == "__main__":
     while 1:
+        print("================图书管理系统================")
         n=input("注册or登入1/2: ")
         if n=='1':
             m=BookManager()
